@@ -7,34 +7,7 @@ from argparse import ArgumentParser
 # OUT_PATH: str = "../data/lena.cartoon.jpeg"
 # N_COLORS: int = 2
 
-
-def main():
-    arg_parser = ArgumentParser(
-        description='Convert a "real-life" image into a "cartoon-ized" image'
-        "based on color clustering."
-    )
-
-    arg_parser.add_argument("inputfile", help="Filepath of input image")
-    arg_parser.add_argument(
-        "-n",
-        "--ncolors",
-        help="Number of colors to use. Typically a small value like 2 or 3.",
-        type=int,
-        default=2,
-    )
-    arg_parser.add_argument(
-        "-o", "--output", help="Filepath to put the processed image"
-    )
-    arg_parser.add_argument(
-        "-v", "--verbose", help="Verbose while this program runs", action="store_true"
-    )
-
-    args = arg_parser.parse_args()
-    IMG_PATH: str = args.inputfile
-    OUT_PATH: str = args.output
-    N_COLORS: int = args.ncolors
-    verbose: bool = args.verbose
-
+def cartoonize(IMG_PATH: str, OUT_PATH: str, N_COLORS: int = 2, verbose: bool = False)
     if verbose:
         print(f"Reading image {IMG_PATH}")
 
@@ -82,6 +55,41 @@ def main():
     img_out: Image = Image.fromarray(
         img_arr,
         mode=image.mode,
+    )
+    return img_out
+
+
+def main():
+    arg_parser = ArgumentParser(
+        description='Convert a "real-life" image into a "cartoon-ized" image'
+        "based on color clustering."
+    )
+
+    arg_parser.add_argument("inputfile", help="Filepath of input image")
+    arg_parser.add_argument(
+        "-n",
+        "--ncolors",
+        help="Number of colors to use. Typically a small value like 2 or 3.",
+        type=int,
+        default=2,
+    )
+    arg_parser.add_argument(
+        "-o", "--output", help="Filepath to put the processed image"
+    )
+    arg_parser.add_argument(
+        "-v", "--verbose", help="Verbose while this program runs", action="store_true"
+    )
+
+    args = arg_parser.parse_args()
+    IMG_PATH: str = args.inputfile
+    OUT_PATH: str = args.output
+    N_COLORS: int = args.ncolors
+    verbose: bool = args.verbose
+    img_out: Image = cartoonize(
+        IMG_PATH=IMG_PATH,
+        OUT_PATH=OUT_PATH,
+        N_COLORS=N_COLORS,
+        verbose=verbose,
     )
     img_out.save(OUT_PATH)
     if verbose:
