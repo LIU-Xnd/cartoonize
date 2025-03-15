@@ -7,7 +7,12 @@ from argparse import ArgumentParser
 # OUT_PATH: str = "../data/lena.cartoon.jpeg"
 # N_COLORS: int = 2
 
-def cartoonize(IMG_PATH: str, OUT_PATH: str, N_COLORS: int = 2, verbose: bool = False)
+
+def cartoonize(
+    IMG_PATH: str,
+    N_COLORS: int = 2,
+    verbose: bool = False,
+):
     if verbose:
         print(f"Reading image {IMG_PATH}")
 
