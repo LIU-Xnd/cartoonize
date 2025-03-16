@@ -92,7 +92,6 @@ def main():
     verbose: bool = args.verbose
     img_out: Image = cartoonize(
         IMG_PATH=IMG_PATH,
-        OUT_PATH=OUT_PATH,
         N_COLORS=N_COLORS,
         verbose=verbose,
     )
